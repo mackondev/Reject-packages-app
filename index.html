@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="indexscript.js"></script>
+
+    <style>
+        #viewBtn{
+            bottom: 0px;
+            position: absolute;
+            right: 0px;
+            height: 150px;
+            width: 360px;
+            font-size: 30px;
+        }
+        body{
+            font-size: 40px;
+            background-color:#eee;
+        }
+        input{
+            width: 200px;
+            line-height: 200%;
+            font-size: 15px;
+        }
+        input[type=submit]{
+            width: 30%;
+            height: 8em;
+            position: absolute;
+            left: 0px;
+            bottom: 0px;
+        }
+        #settingsVariables{
+            border: 1px solid red;
+            width: 500px;
+            text-align: right;
+            height: 250px;
+            right: 0px;
+            top: 0px;
+            position: absolute;
+        }
+        #setupBtn{
+            position: absolute;
+            right: 0px;
+            width: 10%;
+            height: 10%;
+            background: red;
+            top: 42%;
+        }
+    </style>
+ <title>Rejestracja paczek</title>
+
+</head>
+<body onload="data();load();">
+
+<form method="post" action="connect.php" autocomplete="off">
+    <!-- Automatyczne wypełnianie w ustawieniach-->
+    <div id="settingsVariables" align="right">
+Data <input type="text" id="datePicker" name="date"/><br><br>
+ID kontrolujacego<input type="text" id="controller" name="controller"/><br><br>
+Zmiana <input type="text" id="shift" name="shift"/><br><br>
+    </div>
+    <div align="left">
+    <!-- Automatyczne wypełnianie w ustawieniach-->
+<input class="vertical" type="text" id="packNumber" name="packNumber" autofocus/> Numer paczki<br><br>
+<input class="vertical" type="text" id="packer" name="packer"/> ID pakujacego<br><br>
+<input class="vertical" list="statusList" id="status" name="status"/> Status paczki<br><br>
+<input class="vertical" list="categoryListData" id="categoryList" name="categoryList"> Kategoria bledu<br><br>
+<input class="vertical" list="errorListData" id="errorList" name="errorList"> Rodzaj bledu<br><br>
+<input type="submit" value="AKCEPTUJ">
+</div>
+</form>
+<button type="submit" id="viewBtn" onclick="window.location.href='viewsql.php'">LISTA</button>
+<button id="setupBtn" type="button" onclick="window.location.href='settings.html'">USTAWIENIA</button>
+<datalist id="categoryListData">
+    <option value="Materialy promocyjne"></option>
+    <option value="Naklejka brandowa"></option>
+    <option value="Opakowanie"></option>
+    <option value="Karton"></option>
+    <option value="Foliopak"></option>
+    <option value="Faktura"></option>
+    <option value="Etykieta przewozowa"></option>
+    <option value="Towar"></option>
+</datalist>
+<datalist id="errorListData">
+    <option value="Brak"></option>
+    <option value="Uszkodzony/e"></option>
+    <option value="Niekompletna"></option>
+    <option value="Spoza zamowienia"></option>
+    <option value="Niezgodnosc z FV"></option>
+    <option value="Niepotrzebny/e"></option>
+    <option value="W nieprawidlowym miejscu"></option>
+    <option value="Zly rozmiar"></option>
+    <option value="Nieprawidlowo sklejony"></option>
+    <option value="Zamiast foliopaka"></option>
+</datalist>
+<datalist id="statusList">
+    <option value="OK"></option>
+    <option value="FAULTY"></option>
+</datalist>
+    <script>
+    function load(){
+        kontroler=localStorage.getItem('kontrolerID');
+        zmiana=localStorage.getItem('zmianaID');
+        document.getElementById('controller').value = kontroler;
+        document.getElementById('shift').value = zmiana;
+    }
+        var month;
+        switch(new Date().getMonth()){
+                case 0:
+                month = "1";
+                break;
+                case 1:
+                month = "2";
+                break;
+                case 2:
+                month = "3";
+                break;
+                case 3:
+                month = 4;
+                break;
+                case 4:
+                month = 5;
+                break;
+                case 5:
+                month = 6;
+                break;
+                case 6:
+                month = 7;
+                break;
+                case 7:
+                month = 8;
+                break;
+                case 8:
+                month = 9;
+                break;
+                case 9:
+                month = 10;
+                break;
+                case 10:
+                month = 11;
+                break;
+                case 11:
+                month = 12;
+        }
+        function data(){
+        var d = new Date();
+        var minuty = d.getMinutes();
+        if(minuty<=9){
+
+            var time= d.getFullYear() + "-"+month+"-"+d.getDate()+" | " + d.getHours() + ":0" + d.getMinutes() + ":" + d.getSeconds();
+        }
+        else{
+            var time=  d.getFullYear() + "-"+month+"-"+d.getDate()+" | " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+        }
+        
+        document.getElementById('datePicker').value= time;
+        }
+    </script>
+
+</body>
+</html>

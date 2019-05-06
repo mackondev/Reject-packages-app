@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="indexscript.js"></script>
+        <style>
+            body{
+                background-color: #eee;
+            }
+        label{
+            font-size:  30px;
+        }
+        input{
+            width: 150px;
+            line-height: 300%;
+            font-size: 30px;
+            align: left;
+        }
+        button{
+            width: 30em;
+            height: 8em;
+        }
+        </style>
+    </head>
+    <body>
+        <form>
+            <div>
+                <input type="text" id="kontrolervalue" placeholder="ID" autofocus>
+                <label>ID kontrolujacego</label>
+            </div>
+            <div>
+                <input type="text" id="zmianavalue">
+                <label> Zmiana</label>
+            </div>
+            <button type="button" value="ZAPISZ" onclick="settings()">ZAPISZ</button>
+        </form>
+    </body>
+</html>
